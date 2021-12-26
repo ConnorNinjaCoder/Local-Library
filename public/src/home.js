@@ -19,6 +19,11 @@ function getBooksBorrowedCount(books) {
   }, 0);
 }
 
+/*Helper function that returns a trimmed array */
+function sliceArray(array, trimStart, trimEnd) {
+  return array.slice(trimStart,trimEnd);
+}
+
 /*Returns an array containing five objects or fewer that represents the most common occurring genres, ordered from most common to least.
 
 Each object in the returned array has two keys:
@@ -52,7 +57,7 @@ function getMostCommonGenres(books) {
 
     mostCommonGenres.sort((genreA, genreB) => genreA.count > genreB.count ? -1 : 1);
 
-    return mostCommonGenres.slice(0,5);
+    return sliceArray(mostCommonGenres, 0, 5);
   }
 
 /*Returns an array containing five objects or fewer that represents the most popular books in the library. Popularity is represented by the number of times a book has been borrowed.
@@ -72,8 +77,8 @@ function getMostPopularBooks(books) {
         mostPopularBooks.push(tempPopularBook);
      });
              
-    return mostPopularBooks.slice(0,5);
-  }
+    return sliceArray(mostPopularBooks, 0, 5);
+}
 
 
 /*Returns an array containing five objects or fewer that represents the most popular authors whose books have been checked out the most. Popularity is represented by finding all of the books written by the author and then adding up the number of times those books have been borrowed.
@@ -99,12 +104,13 @@ function getMostPopularAuthors(books, authors) {
   });
   result.sort((resultA, resultB) => resultA.count > resultB.count ? -1 : 1);
   
-  return result.slice(0,5);
+  return sliceArray(result, 0, 5);
 }
 module.exports = {
   getTotalBooksCount,
   getTotalAccountsCount,
   getBooksBorrowedCount,
+  sliceArray,
   getMostCommonGenres,
   getMostPopularBooks,
   getMostPopularAuthors,
