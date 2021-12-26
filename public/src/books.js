@@ -44,6 +44,11 @@ function partitionBooksByBorrowedStatus(books) {
   allBooks = [booksCheckedOut, booksAvailable];
   return allBooks;
 }
+
+/*Helper function that returns a trimmed array */
+function sliceArray(array, trimStart, trimEnd) {
+  return array.slice(trimStart,trimEnd);
+}
 /*Should return an array of ten or fewer account objects that represents the accounts given by the IDs in the provided book's `borrows` array. However, each account object should include the `returned` entry from the corresponding transaction object in the `borrows` array.*/
 function getBorrowersForBook(book, accounts) {
   let accountsInBorrows = [];
@@ -58,7 +63,7 @@ function getBorrowersForBook(book, accounts) {
   });
   
   if (accountsInBorrows.length > 10) {
-  return accountsInBorrows.slice(0,10);
+  return sliceArray(accountsInBorrows, 0, 10);
   }
   return accountsInBorrows;
 }
@@ -67,6 +72,6 @@ module.exports = {
   findAuthorById,
   findBookById,
   partitionBooksByBorrowedStatus,
+  sliceArray,
   getBorrowersForBook,
 };
-
